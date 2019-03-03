@@ -28,7 +28,7 @@ body { background-color:ghostwhite }
     font-size:12px;
 }
 #notes {
-  float: right;
+  /* float: right; */
   width: 30%;
 }
 textarea, input {
