@@ -9,7 +9,6 @@ var cheerio = require("cheerio");
 
 //Requiring the models:
 var db = require("./models");
-// mongoose.connect(MONGODB_URI);
 
 var PORT = process.env.PORT || 3000;
 // Initialize Express
@@ -27,9 +26,7 @@ app.use(express.urlencoded({
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
-// Database configuration
-// var databaseUrl = "scraper";
-// var collections = ["scrapedData"];
+
 
 //Connecting to the Database
 
@@ -62,18 +59,16 @@ app.get("/all", function (req, res) {
 app.get("/scrape", function (req, res) {
 
   // Make a request via axios for the music articles on Westword
-  axios.get("https://www.westword.com/topic/music-news-6206425").then(function (response) {
+  axios.get("https://www.westword.com/news").then(function (response) {
     // Load the html body from axios into cheerio
    
     var $ = cheerio.load(response.data);
     // For each element with a "title" class
     $("a.headline").each(function (i, element) {
       var result = {};
-      var linkStart="https://www.westword.com/topic/music-news-6206425";
-      result.title = $(this)
-        .text();
-      result.link = $(this)
-        .attr(linkStart,"a href");
+      
+      result.title = $(this) .text();
+      result.link = $(this).attr("href");
 
       // create a new article with the result object
       db.Article.create(result)

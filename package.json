@@ -22,7 +22,7 @@
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "logger": "0.0.1",
-   
+    "mongo": "^0.1.0",
     "mongoose": "^5.4.15",
     "morgan": "^1.9.1",
     "nodemon": "^1.18.10"
