@@ -1,6 +1,6 @@
-$(document).ready(function () {
-  $("#articles").empty();
-});
+// $(document).ready(function () {
+//   $("#articles").empty();
+// });
 
 
 
@@ -8,6 +8,7 @@ $("#button-scrape").on("click", function () {
   $.getJSON("/articles", function (data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
+      
       // var button = $("</button>",{
       //   attr: url("https://www.westword.com/music" + data[i].link),
       //   class: "btn-primary",
@@ -21,11 +22,14 @@ $("#button-scrape").on("click", function () {
       //     text: "Saved"
       //   });
       // Display the apropos information on the page
-      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "</p>");
+      $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title+"</p>");  
+      $("#articles").append("<button data-link='", data[i].link+ "' id='article-link'>View Article</button>");
+
 
     }
   });
 });
+
 
 
 // Whenever someone clicks a p tag
@@ -54,6 +58,7 @@ $(document).on("click", "p", function () {
 
       // If there's a note in the article
       if (data.note) {
+        console.log("Here's the note data", data.note)
         // Place the title of the note in the title input
         $("#titleinput").val(data.note.title);
         // Place the body of the note in the body textarea
@@ -84,7 +89,7 @@ $(document).on("click", "#savenote", function () {
       console.log(data);
       // Empty the notes section
       $("#notes").empty();
-      $("#articles").append(this.data)
+      $("#articles").append("<p>"+this.data+"</p")
     });
 
   // Also, remove the values entered in the input and textarea for note entry
