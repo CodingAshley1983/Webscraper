@@ -30,9 +30,13 @@ app.use(express.static("public"));
 
 //Connecting to the Database
 
-mongoose.connect("mongodb://localhost/mongoHeadlines", {
-  useNewUrlParser: true
-})
+// mongoose.connect("mongodb://localhost/mongoHeadlines", {
+//   useNewUrlParser: true
+// })
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines"; 
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true}).catch(err => {console.log(err)});
 
 
 // Main route- rendering the index html page
